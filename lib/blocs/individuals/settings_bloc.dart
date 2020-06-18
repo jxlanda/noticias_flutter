@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/blocs/events/settings_event.dart';
 import 'package:news/blocs/states/settings_state.dart';
-import 'package:news/environment/environment.dart' as evn;
+import 'package:news/environment/environment.dart' as env;
+import 'package:news/utils/utils.dart' as utils;
 // Hive
 import 'package:hive/hive.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   
-  static final Box<bool> settings = Hive.box<bool>(evn.settings);
+  static final Box<bool> settings = Hive.box<bool>(env.settings);
 
   @override
   SettingsState get initialState => SettingsState(ThemeMode.light);
@@ -25,14 +26,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   Stream<SettingsState> _mapThemeLoadStartedToState() async* {
 
     final darkMode = settings.get('darkMode');
-
-    if (darkMode == null) {
-      settings.put('darkMode', false);
-      yield SettingsState(ThemeMode.light);
-    } else {
-      ThemeMode themeMode = darkMode ? ThemeMode.dark : ThemeMode.light;
-      yield SettingsState(themeMode);
-    }
+    // No puede ser nulo por que se asigna en void main
+    ThemeMode themeMode = darkMode ? ThemeMode.dark : ThemeMode.light;
+    yield SettingsState(themeMode);
   }
 
   Stream<SettingsState> _mapThemeChangedToState(bool value) async* {
@@ -46,5 +42,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       settings.put('darkMode', false);
       yield SettingsState(ThemeMode.light);
     }
+    // Al final cambiamos el systemNavBar
+    utils.changeSystemNavBar(!darkMode);
   }
 }

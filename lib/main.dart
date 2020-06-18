@@ -1,9 +1,9 @@
-// // Directory
-// import 'dart:io';
 // Folders
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:news/pages/pages.dart';
 import 'package:news/repositories/repositories.dart';
+import 'package:news/utils/utils.dart' as utils;
 import 'package:path_provider/path_provider.dart';
 import 'blocs/blocs.dart';
 import 'models/models.dart';
@@ -41,11 +41,20 @@ class MyApp extends StatelessWidget {
         super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    // Establecemos una instancia de la base  de datos
+    final Box<bool> settings = Hive.box<bool>(env.settings);
+    // Obtenemos el valor de darkMode, si no existe se crea con valor por defecto
+    final isDark = settings.get('darkMode', defaultValue: false);
+    // Asignar color del systemNavigationBar
+    utils.changeSystemNavBar(isDark);
+    
     return BlocProvider<SettingsBloc>(
       create: (context) => SettingsBloc()..add(ThemeLoadStarted()),
       child: BlocBuilder<SettingsBloc, SettingsState> (
         builder: (context, themeState) => 
         MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Noticias',
           themeMode: themeState.themeMode,
           theme: ThemeData(
@@ -69,6 +78,7 @@ class MyApp extends StatelessWidget {
               accentColor: Colors.blue,
               disabledColor: Colors.grey,
               dividerColor: Colors.white,
+              toggleableActiveColor: Colors.blue,
               // Color bottomnavigationbar
               canvasColor: Colors.black,
               cardColor: Colors.grey[900],

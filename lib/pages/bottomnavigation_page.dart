@@ -32,7 +32,8 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
             builder: (context, state) {
               if (state is PageLoading) {
                 return Center(
-                    child: CircularProgressIndicator(backgroundColor: Colors.red));
+                    child: CircularProgressIndicator()
+                );
               }
               if (state is FirstPageLoaded) {
                 print("Pagina 1");
