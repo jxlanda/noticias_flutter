@@ -76,6 +76,8 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.dark,
               primarySwatch: Colors.blue,
               accentColor: Colors.blue,
+              // Color de texto en textformfield
+              // hintColor: Colors.red,
               disabledColor: Colors.grey,
               dividerColor: Colors.white,
               toggleableActiveColor: Colors.blue,
@@ -89,7 +91,10 @@ class MyApp extends StatelessWidget {
                 elevation: 0.0,
                 textTheme: TextTheme(headline6: TextStyle(color: Colors.white, fontSize: 20.0))
               ),
-              scaffoldBackgroundColor: Colors.black
+              scaffoldBackgroundColor: Colors.black,
+              bottomSheetTheme: BottomSheetThemeData(
+                backgroundColor: Colors.grey[900]
+              )
             ),
           home: BlocProvider<BottomNavigationBloc>(
             create: (context) => BottomNavigationBloc(

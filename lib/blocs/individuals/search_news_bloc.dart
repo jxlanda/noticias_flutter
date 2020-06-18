@@ -49,6 +49,8 @@ class SearchNewsBloc extends Bloc<SearchNewsEvent, SearchNewsState> {
         else if (currentState is SearchNewsSuccess && (event.query != _query)) {
           // Almacenamos la busqueda en una variable privada
           _query = event.query;
+          // Reseteamos la pagina de busqueda
+          _currentPage = 1;
           // Nos movemos al estado de Loading
           yield SearchNewsLoading();
           // Hacemos la peticion

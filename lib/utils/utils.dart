@@ -16,7 +16,7 @@ void launchURL(String url) async {
   }
 }
 
-void changeSystemNavBar(bool darkMode){
+void changeSystemNavBar(bool darkMode) {
 
   final SystemUiOverlayStyle sysNavBarDark = SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.black,
@@ -31,6 +31,7 @@ void changeSystemNavBar(bool darkMode){
     ? SystemChrome.setSystemUIOverlayStyle(sysNavBarDark) 
     : SystemChrome.setSystemUIOverlayStyle(sysNavBarLight);
 }
+
 
 void modalBottomSheet(BuildContext context, Article article) {
   final scaffold = Scaffold.of(context);

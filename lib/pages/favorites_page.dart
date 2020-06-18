@@ -23,7 +23,9 @@ class FavoritesPage extends StatelessWidget {
         builder: (BuildContext context, Box<Article> box, Widget widget) {
           // Genera una lista de keys la base de datos favorites
           List<int> keys = box.keys.cast<int>().toList();
-          return ListView.separated(
+          if(keys.length == 0)
+          return Center(child: Text("No hay favoritos"));
+          else return ListView.separated(
             itemBuilder: (context, index) {
               return SingleArticle(article: box.get(keys[index]));
             }, 

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:news/blocs/blocs.dart';
 import 'package:news/widgets/widgets.dart';
@@ -17,6 +18,7 @@ class _NewsBuilderState extends State<NewsBuilder>
   // Cargara de acuerdo a los pixeles antes de llegar la final
   final _scrollThreshold = 50.0;
   NewsBloc _newsBloc;
+  Timer _debounce;
 
   @override
   bool get wantKeepAlive => true;
@@ -39,10 +41,13 @@ class _NewsBuilderState extends State<NewsBuilder>
   void _onScroll() {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
-    if (maxScroll - currentScroll <= _scrollThreshold) {
-      _newsBloc.add(FetchTopHeadlinesByCategory(
+      if (maxScroll - currentScroll <= _scrollThreshold) {
+        if (_debounce?.isActive ?? false) _debounce.cancel();
+          _debounce = Timer(const Duration(milliseconds: 500), () {
+            _newsBloc.add(FetchTopHeadlinesByCategory(
           category: widget.category, country: 'mx'));
-    }
+          }); 
+      }
   }
 
   @override
