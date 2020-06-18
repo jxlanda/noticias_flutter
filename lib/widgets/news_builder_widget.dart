@@ -56,11 +56,7 @@ class _NewsBuilderState extends State<NewsBuilder>
         );
       } else if (state is NewsLoaded) {
         return ListView.separated(
-          separatorBuilder: (context, index) => Divider(
-            color: Colors.grey[200],
-            height: 12.0,
-            thickness: 0.0,
-          ),
+          separatorBuilder: (context, index) => SizedBox(height: 10.0),
           controller: _scrollController,
           itemCount: state.hasReachedMax
               ? (state.articles.length)

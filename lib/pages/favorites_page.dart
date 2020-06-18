@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:news/models/models.dart';
+import 'package:news/widgets/single_article_widget.dart';
 
 class FavoritesPage extends StatelessWidget {
   final String text;
@@ -6,8 +10,28 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('The text is: $text')),
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(42.0),
+        child: AppBar(
+            title: Text("Favoritos"),
+            centerTitle: true
+        ),
+      ),
+      body: ValueListenableBuilder(
+        valueListenable: Hive.box<Article>('favorites').listenable(),
+        builder: (BuildContext context, Box<Article> box, Widget widget) {
+          // Genera una lista de keys la base de datos favorites
+          List<int> keys = box.keys.cast<int>().toList();
+          return ListView.separated(
+            itemBuilder: (context, index) {
+              return SingleArticle(article: box.get(keys[index]));
+            }, 
+            separatorBuilder: (context, index) => SizedBox(height: 10.0), 
+            itemCount: keys.length
+          );
+        }
+      ),
     );
   }
 }

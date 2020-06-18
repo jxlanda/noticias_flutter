@@ -16,9 +16,8 @@ class NewsPage extends StatelessWidget {
           child: Scaffold(
             appBar: TabBar(
               isScrollable: true,
-              labelColor: Colors.blue,
-              //indicator: BoxDecoration(color: Colors.blue),
-              unselectedLabelColor: Colors.grey,
+              labelColor: Theme.of(context).accentColor,
+              unselectedLabelColor: Theme.of(context).disabledColor,
               tabs: [
                 Tab(child: Text("General")),
                 Tab(child: Text("Ciencia")),
@@ -29,7 +28,6 @@ class NewsPage extends StatelessWidget {
                 Tab(child: Text("Tecnología")),
               ],
             ),
-            backgroundColor: Colors.grey[200],
             body: TabBarView(
               children: [
                 BlocProvider(
@@ -66,19 +64,3 @@ class NewsPage extends StatelessWidget {
         ));
   }
 }
-
-// appBar: AppBar(
-//   title: Text("Noticias"),
-//   bottom: TabBar(
-//     isScrollable: true,
-//     tabs: [
-//       Tab(child: Text("General")),
-//       Tab(child: Text("Ciencia")),
-//       Tab(child: Text("Deportes")),
-//       Tab(child: Text("Entretenimiento")),
-//       Tab(child: Text("Negocio")),
-//       Tab(child: Text("Salud")),
-//       Tab(child: Text("Tecnología")),
-//     ],
-//   ),
-// ),

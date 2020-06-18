@@ -41,9 +41,10 @@ class _SearchNewsState extends State<SearchNews> {
 
   @override
   void dispose() {
+    // The method 'cancel' was called on null.
+    // _debounce.cancel();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
-    _debounce.cancel();
     super.dispose();
   }
 
@@ -65,11 +66,7 @@ class _SearchNewsState extends State<SearchNews> {
         return Center(child: Text('¡No hay resultados!'));
         else return
         ListView.separated(
-            separatorBuilder: (context, index) => Divider(
-                  color: Colors.grey[200],
-                  height: 12.0,
-                  thickness: 0.0,
-            ),
+            separatorBuilder: (context, index) => SizedBox(height: 10.0),
             controller: _scrollController,
             itemCount: state.hasReachedMax
                 ? (state.articles.length)

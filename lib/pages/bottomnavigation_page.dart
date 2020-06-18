@@ -44,7 +44,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
               }
               if (state is ThirdPageLoaded) {
                 print("Pagina 3");
-                return Center(child: Text("Tercera pagina"));
+                return SettingsPage();
               }
               return Container();
             },
@@ -58,9 +58,9 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
           type: BottomNavigationBarType.shifting,
           currentIndex:
               BlocProvider.of<BottomNavigationBloc>(context).currentIndex,
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Theme.of(context).accentColor,
           showUnselectedLabels: false,
-          unselectedItemColor: Colors.grey,
+          unselectedItemColor: Theme.of(context).disabledColor,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(FlutterIcons.newspaper_mco), title: Text("Noticias")),

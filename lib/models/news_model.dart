@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
+
+part 'news_model.g.dart';
 
 News newsFromJson(String str) => News.fromJson(json.decode(str));
 
@@ -39,8 +42,25 @@ class News extends Equatable {
 }
 
 // Noticia
-class Article {
-  Article({
+@HiveType(typeId: 0)
+class Article extends HiveObject {
+  @HiveField(0)
+  Source source;
+  @HiveField(1)
+  String author;
+  @HiveField(2)
+  String title;
+  @HiveField(3)
+  String description;
+  @HiveField(4)
+  String url;
+  @HiveField(5)
+  String urlToImage;
+  @HiveField(6)
+  DateTime publishedAt;
+
+  String content;
+    Article({
     this.source,
     this.author,
     this.title,
@@ -51,14 +71,6 @@ class Article {
     this.content,
   });
 
-  Source source;
-  String author;
-  String title;
-  String description;
-  String url;
-  String urlToImage;
-  DateTime publishedAt;
-  String content;
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
         source: Source.fromJson(json["source"]),
@@ -84,13 +96,16 @@ class Article {
 }
 
 // Fuente
-class Source {
+@HiveType(typeId: 1)
+class Source extends HiveObject {
   Source({
     this.id,
     this.name,
   });
 
+  @HiveField(0)
   String id;
+  @HiveField(1)
   String name;
 
   factory Source.fromJson(Map<String, dynamic> json) => Source(

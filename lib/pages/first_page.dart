@@ -22,6 +22,7 @@ class _SearchPageState extends State<SearchPage> {
   // Variables
   String query = '';
   bool isSearching = false;
+  bool isWriting = false;
   final _searchQuery = new TextEditingController();
   Timer _debounce;
 
@@ -35,11 +36,15 @@ class _SearchPageState extends State<SearchPage> {
   void dispose() {
     _searchQuery.removeListener(_onSearchChanged);
     _searchQuery.dispose();
-    _debounce.cancel();
+    // The method cancel was called on null
+    // _debounce.cancel();
     super.dispose();
   }
 
   _onSearchChanged() {
+    if(_searchQuery.text.length > 0)
+      isWriting = true;
+    else isWriting = false;
     if (_debounce?.isActive ?? false) _debounce.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
       setState(() {
@@ -59,12 +64,10 @@ class _SearchPageState extends State<SearchPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(42.0),
         child: AppBar(
-            title: Text("Busqueda", style: TextStyle(color: Colors.black)),
-            centerTitle: true,
-            backgroundColor: Colors.grey[200],
-            elevation: 0.0),
+            title: Text("Busqueda"),
+            centerTitle: true
+        ),
       ),
-      backgroundColor: Colors.grey[200],
       body: SafeArea(
         child: BlocProvider(
           create: (context) =>
@@ -77,9 +80,10 @@ class _SearchPageState extends State<SearchPage> {
                   controller: _searchQuery,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      suffixIcon: Icon(Icons.search),
+                      prefixIcon: Icon(Icons.search),
+                      suffixIcon: isWriting? InkWell(child: Icon(Icons.close), onTap: ()=> _searchQuery.text = '') : null,
                       hintText: "Buscar",
-                      fillColor: Colors.white,
+                      fillColor: Theme.of(context).cardColor,
                       filled: true),
                   autofocus: false,
                   onEditingComplete: () {

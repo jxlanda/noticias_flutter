@@ -5,6 +5,7 @@ import 'package:news/utils/utils.dart' as utils;
 import 'package:news/widgets/widgets.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+
 class SingleArticle extends StatelessWidget {
   // Parametro
   final Article article;
@@ -13,6 +14,7 @@ class SingleArticle extends StatelessWidget {
   final double imageHeight = 92.0;
   final TextStyle titleArticle =
       TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0);
+
   final TextStyle subtitleArticle = TextStyle(color: Colors.grey[600]);
 
   SingleArticle({Key key, @required this.article}) : super(key: key);
@@ -22,7 +24,7 @@ class SingleArticle extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Material(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         child: InkWell(
           onTap: () => utils.launchURL(article.url),
           child: Row(
@@ -54,7 +56,8 @@ class SingleArticle extends StatelessWidget {
                               timeago.format(article.publishedAt, locale: 'es'),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: subtitleArticle),
+                          style: subtitleArticle
+                      ),
                     )
                   ],
                 ),

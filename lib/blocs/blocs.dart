@@ -14,3 +14,9 @@ export 'states/bottomnavigation_state.dart';
 export 'states/search_news_state.dart';
 export 'events/search_news_event.dart';
 export 'individuals/search_news_bloc.dart';
+
+// Settings Page
+
+export 'states/settings_state.dart';
+export 'events/settings_event.dart';
+export 'individuals/settings_bloc.dart';
