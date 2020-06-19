@@ -16,3 +16,7 @@ Dentro del archivo hay que colocar tu API KEY de News API en la línea:  `'news_
 
 - Documentación: https://newsapi.org/
 
+### Imágenes
+
+| <img src="https://github.com/jxlanda/noticias_flutter/blob/master/github/news.png?raw=true?raw=true?raw=true" alt="drawing" width="200"/> | <img src="https://github.com/jxlanda/noticias_flutter/blob/master/github/search.png?raw=true?raw=true" alt="drawing" width="200"/> | <img src="https://github.com/jxlanda/noticias_flutter/blob/master/github/favorites.png?raw=true?raw=true" alt="drawing" width="200"/> | <img src="https://github.com/jxlanda/noticias_flutter/blob/master/github/darkmode.png?raw=true?raw=true" alt="drawing" width="200"/> |
+|-------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
