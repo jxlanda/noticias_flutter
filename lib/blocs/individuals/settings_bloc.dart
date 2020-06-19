@@ -25,7 +25,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   Stream<SettingsState> _mapThemeLoadStartedToState() async* {
 
-    final darkMode = settings.get('darkMode');
+    final darkMode = settings.get('darkMode', defaultValue: false);
     // No puede ser nulo por que se asigna en void main
     ThemeMode themeMode = darkMode ? ThemeMode.dark : ThemeMode.light;
     yield SettingsState(themeMode);
@@ -33,7 +33,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   Stream<SettingsState> _mapThemeChangedToState(bool value) async* {
     
-    final darkMode = settings.get('darkMode');
+    final darkMode = settings.get('darkMode', defaultValue: false);
 
     if (value && !darkMode) {
       settings.put('darkMode', true);
