@@ -6,31 +6,36 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 
 void launchURL(String url) async {
   if (await canLaunch(url)) {
-    await launch(url, forceWebView: true);
+    await launch(url, forceWebView: false);
   } else {
     throw 'No se pudo abrir $url';
   }
 }
 
-void changeSystemNavBar(bool darkMode) {
+// void changeSystemNavBar(bool darkMode) {
 
-  final SystemUiOverlayStyle sysNavBarDark = SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.black,
-    systemNavigationBarIconBrightness: Brightness.light
-  );
-  final SystemUiOverlayStyle sysNavBarLight = SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.white,
-    systemNavigationBarIconBrightness: Brightness.dark
-  );
+//   final SystemUiOverlayStyle sysNavBarDark = SystemUiOverlayStyle(
+//     // systemNavigationBarColor: Colors.transparent,
+//     // systemNavigationBarIconBrightness: Brightness.light,
+//     // statusBarColor: Colors.transparent,
+//     // statusBarIconBrightness: Brightness.light
+//   );
+  
+//   final SystemUiOverlayStyle sysNavBarLight = SystemUiOverlayStyle(
+//     // systemNavigationBarColor: Colors.transparent,
+//     // systemNavigationBarIconBrightness: Brightness.dark,
+//     // statusBarColor: Colors.transparent,
+//     // statusBarIconBrightness: Brightness.dark
+//   );
 
-  darkMode
-    ? SystemChrome.setSystemUIOverlayStyle(sysNavBarDark) 
-    : SystemChrome.setSystemUIOverlayStyle(sysNavBarLight);
-}
+//   darkMode
+//     ? SystemChrome.setSystemUIOverlayStyle(sysNavBarDark) 
+//     : SystemChrome.setSystemUIOverlayStyle(sysNavBarLight);
+// }
 
 
 void modalBottomSheet(BuildContext context, Article article) {

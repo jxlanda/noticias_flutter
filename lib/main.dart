@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news/pages/pages.dart';
 import 'package:news/repositories/repositories.dart';
-import 'package:news/utils/utils.dart' as utils;
+// import 'package:news/utils/utils.dart' as utils;
 import 'package:path_provider/path_provider.dart';
 import 'blocs/blocs.dart';
 import 'models/models.dart';
@@ -35,20 +35,13 @@ void main() async {
 }
  
 class MyApp extends StatelessWidget {
+
   final NewsRepository newsRepository;
   MyApp({Key key, @required this.newsRepository})
       : assert(newsRepository != null),
         super(key: key);
   @override
   Widget build(BuildContext context) {
-
-    // Establecemos una instancia de la base  de datos
-    final Box<bool> settings = Hive.box<bool>(env.settings);
-    // Obtenemos el valor de darkMode, si no existe se crea con valor por defecto
-    final isDark = settings.get('darkMode', defaultValue: false);
-    // Asignar color del systemNavigationBar
-    utils.changeSystemNavBar(isDark);
-    
     return BlocProvider<SettingsBloc>(
       create: (context) => SettingsBloc()..add(ThemeLoadStarted()),
       child: BlocBuilder<SettingsBloc, SettingsState> (
@@ -63,6 +56,8 @@ class MyApp extends StatelessWidget {
               disabledColor: Colors.grey,
               // Color bottomnavigationbar
               canvasColor: Colors.white,
+              // Color systembottomnavigationbar
+              bottomAppBarColor: Colors.white,
               // AppBarTheme
               appBarTheme: AppBarTheme(
                 color: Colors.grey[200],
@@ -83,11 +78,13 @@ class MyApp extends StatelessWidget {
               toggleableActiveColor: Colors.blue,
               // Color bottomnavigationbar
               canvasColor: Colors.black,
+              // Color systembottomnavigationbar
+              bottomAppBarColor: Colors.black,
               cardColor: Colors.grey[900],
               // AppBarTheme
               appBarTheme: AppBarTheme(
                 color: Colors.black,
-                brightness: Brightness.dark,
+                brightness: Brightness.light,
                 elevation: 0.0,
                 textTheme: TextTheme(headline6: TextStyle(color: Colors.white, fontSize: 20.0))
               ),

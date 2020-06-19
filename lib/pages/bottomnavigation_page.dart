@@ -1,4 +1,5 @@
 // Folders
+import 'package:flutter/services.dart';
 import 'package:news/blocs/blocs.dart';
 import 'package:news/pages/favorites_page.dart';
 import 'package:news/pages/pages.dart';
@@ -22,69 +23,80 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: indexStack,
-        children: <Widget>[
-          // Pagina 0
-          NewsPage(key: PageStorageKey("news"), newsRepository: widget.newsRepository),
-          // Otras paginas
-          BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
-            builder: (context, state) {
-              if (state is PageLoading) {
-                return Center(
-                    child: CircularProgressIndicator()
-                );
-              }
-              if (state is FirstPageLoaded) {
-                print("Pagina 1");
-                return SearchPage(newsRepository: widget.newsRepository, number: state.number);
-              }
-              if (state is SecondPageLoaded) {
-                print("Pagina 2");
-                return FavoritesPage(text: state.text);
-              }
-              if (state is ThirdPageLoaded) {
-                print("Pagina 3");
-                return SettingsPage();
-              }
-              return Container();
-            },
-          ),
-        ]
-      ),
+      body: IndexedStack(index: indexStack, children: <Widget>[
+        // Pagina 0
+        NewsPage(
+            key: PageStorageKey("news"), newsRepository: widget.newsRepository),
+        // Otras paginas
+        BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
+          builder: (context, state) {
+            if (state is PageLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
+            if (state is FirstPageLoaded) {
+              print("Pagina 1");
+              return SearchPage(
+                  newsRepository: widget.newsRepository, number: state.number);
+            }
+            if (state is SecondPageLoaded) {
+              print("Pagina 2");
+              return FavoritesPage(text: state.text);
+            }
+            if (state is ThirdPageLoaded) {
+              print("Pagina 3");
+              return SettingsPage();
+            }
+            return Container();
+          },
+        ),
+      ]),
       bottomNavigationBar:
           BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
               builder: (BuildContext context, BottomNavigationState state) {
-        return BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
-          currentIndex:
-              BlocProvider.of<BottomNavigationBloc>(context).currentIndex,
-          selectedItemColor: Theme.of(context).accentColor,
-          showUnselectedLabels: false,
-          unselectedItemColor: Theme.of(context).disabledColor,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(FlutterIcons.newspaper_mco), title: Text("Noticias")),
-            BottomNavigationBarItem(
-                icon: Icon(FlutterIcons.search_mdi), title: Text("Buscar")),
-            BottomNavigationBarItem(
-                icon: Icon(FlutterIcons.star_mdi), title: Text("Favoritos")),
-            BottomNavigationBarItem(icon: Icon(FlutterIcons.settings_mdi), title: Text("Configuración"))
-          ],
-          onTap: (index) {
-            if(index == 0){
-              setState(() {
-                indexStack = 0;
-                BlocProvider.of<BottomNavigationBloc>(context).currentIndex = 0;
-              });
-            } else {
-              setState(() {
-                indexStack = 1;
-                BlocProvider.of<BottomNavigationBloc>(context)
-                  .add(PageTapped(index: index));
-              });
-            }
-          }
+        return 
+        // Theme del System Bottom Navigation Bar y del Status Bar
+        AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            systemNavigationBarColor: Theme.of(context).bottomAppBarColor,
+            systemNavigationBarIconBrightness: Theme.of(context).appBarTheme.brightness,
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Theme.of(context).appBarTheme.brightness
+          ),
+          sized: false,
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
+            currentIndex:
+                BlocProvider.of<BottomNavigationBloc>(context).currentIndex,
+            selectedItemColor: Theme.of(context).accentColor,
+            showUnselectedLabels: false,
+            unselectedItemColor: Theme.of(context).disabledColor,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: Icon(FlutterIcons.newspaper_mco),
+                  title: Text("Noticias")),
+              BottomNavigationBarItem(
+                  icon: Icon(FlutterIcons.search_mdi), title: Text("Buscar")),
+              BottomNavigationBarItem(
+                  icon: Icon(FlutterIcons.star_mdi), title: Text("Favoritos")),
+              BottomNavigationBarItem(
+                  icon: Icon(FlutterIcons.settings_mdi),
+                  title: Text("Configuración"))
+            ],
+            onTap: (index) {
+              if (index == 0) {
+                setState(() {
+                  indexStack = 0;
+                  BlocProvider.of<BottomNavigationBloc>(context).currentIndex =
+                      0;
+                });
+              } else {
+                setState(() {
+                  indexStack = 1;
+                  BlocProvider.of<BottomNavigationBloc>(context)
+                      .add(PageTapped(index: index));
+                });
+              }
+            }),
         );
       }),
     );

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/blocs/events/settings_event.dart';
 import 'package:news/blocs/states/settings_state.dart';
 import 'package:news/environment/environment.dart' as env;
-import 'package:news/utils/utils.dart' as utils;
+//  import 'package:news/utils/utils.dart' as utils;
 // Hive
 import 'package:hive/hive.dart';
 
@@ -43,6 +43,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       yield SettingsState(ThemeMode.light);
     }
     // Al final cambiamos el systemNavBar
-    utils.changeSystemNavBar(!darkMode);
+    // utils.changeSystemNavBar(!darkMode);
   }
 }
