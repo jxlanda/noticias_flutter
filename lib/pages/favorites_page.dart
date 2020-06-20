@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:news/models/models.dart';
 import 'package:news/widgets/single_article_widget.dart';
+import 'package:news/environment/environment.dart' as env;
 
 class FavoritesPage extends StatelessWidget {
   final String text;
@@ -19,10 +20,12 @@ class FavoritesPage extends StatelessWidget {
         ),
       ),
       body: ValueListenableBuilder(
-        valueListenable: Hive.box<Article>('favorites').listenable(),
+        valueListenable: Hive.box<Article>(env.favorites).listenable(),
         builder: (BuildContext context, Box<Article> box, Widget widget) {
           // Genera una lista de keys la base de datos favorites
           List<int> keys = box.keys.cast<int>().toList();
+          // Genera una lista con los valores de la base de datos favorites
+          // List<Article> values = box.values.cast<Article>().toList();
           if(keys.length == 0)
           return Center(child: Text("No hay favoritos"));
           else return ListView.separated(
@@ -33,7 +36,7 @@ class FavoritesPage extends StatelessWidget {
             itemCount: keys.length
           );
         }
-      ),
+      )
     );
   }
 }

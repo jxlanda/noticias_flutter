@@ -35,8 +35,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
             }
             if (state is FirstPageLoaded) {
               print("Pagina 1");
-              return SearchPage(
-                  newsRepository: widget.newsRepository, number: state.number);
+              return SearchPage(newsRepository: widget.newsRepository, number: state.number);
             }
             if (state is SecondPageLoaded) {
               print("Pagina 2");
