@@ -5,7 +5,7 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-
+// Escribir el nombre del modelo a generar
 part 'news_model.g.dart';
 
 News newsFromJson(String str) => News.fromJson(json.decode(str));
@@ -42,10 +42,16 @@ class News extends Equatable {
 }
 
 // Noticia
+// Crear adapter 
+// Escribir @HiveType con su typeId: numeroConsecutivo
+// Extender de HiveObject para tener .Save(), .Delete()
 @HiveType(typeId: 0)
 class Article extends HiveObject {
+  // Colocar @HiveField a cada campo
   @HiveField(0)
   Source source;
+  // En este caso el campo Source depende de otro modelo
+  // Se tiene que crear un adapater tambien para ese modelo
   @HiveField(1)
   String author;
   @HiveField(2)

@@ -6,7 +6,6 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
-// import 'package:flutter/services.dart';
 
 void launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -15,28 +14,6 @@ void launchURL(String url) async {
     throw 'No se pudo abrir $url';
   }
 }
-
-// void changeSystemNavBar(bool darkMode) {
-
-//   final SystemUiOverlayStyle sysNavBarDark = SystemUiOverlayStyle(
-//     // systemNavigationBarColor: Colors.transparent,
-//     // systemNavigationBarIconBrightness: Brightness.light,
-//     // statusBarColor: Colors.transparent,
-//     // statusBarIconBrightness: Brightness.light
-//   );
-  
-//   final SystemUiOverlayStyle sysNavBarLight = SystemUiOverlayStyle(
-//     // systemNavigationBarColor: Colors.transparent,
-//     // systemNavigationBarIconBrightness: Brightness.dark,
-//     // statusBarColor: Colors.transparent,
-//     // statusBarIconBrightness: Brightness.dark
-//   );
-
-//   darkMode
-//     ? SystemChrome.setSystemUIOverlayStyle(sysNavBarDark) 
-//     : SystemChrome.setSystemUIOverlayStyle(sysNavBarLight);
-// }
-
 
 void modalBottomSheet(BuildContext context, Article article) {
   final scaffold = Scaffold.of(context);
@@ -48,6 +25,8 @@ void modalBottomSheet(BuildContext context, Article article) {
   final bool containsArticle = favoriteList.contains(article);
   // Filtrado de items
   // var filteredUsers = userBox.values.where((user) => user.name.startsWith('s'));
+  // Limpiar base de datos
+  // Hive.box('yourBoxName').clear();
 
   showModalBottomSheet(
       context: context,

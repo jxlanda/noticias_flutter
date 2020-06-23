@@ -83,8 +83,8 @@ class _SearchPageState extends State<SearchPage> {
                       prefixIcon: Icon(Icons.search),
                       suffixIcon: isWriting? InkWell(child: Icon(Icons.close), onTap: ()=> _searchQuery.text = '') : null,
                       hintText: "Buscar",
-                      fillColor: Theme.of(context).cardColor,
-                      filled: true),
+                      filled: true
+                  ),
                   autofocus: false,
                   onEditingComplete: () {
                     FocusScope.of(context).requestFocus(FocusNode());

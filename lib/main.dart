@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news/pages/pages.dart';
 import 'package:news/repositories/repositories.dart';
-// import 'package:news/utils/utils.dart' as utils;
 import 'package:path_provider/path_provider.dart';
 import 'blocs/blocs.dart';
 import 'models/models.dart';
@@ -58,6 +57,9 @@ class MyApp extends StatelessWidget {
               canvasColor: Colors.white,
               // Color systembottomnavigationbar
               bottomAppBarColor: Colors.white,
+              inputDecorationTheme: InputDecorationTheme(
+                fillColor: Colors.white
+              ),
               // AppBarTheme
               appBarTheme: AppBarTheme(
                 color: Colors.grey[200],
@@ -81,6 +83,9 @@ class MyApp extends StatelessWidget {
               // Color systembottomnavigationbar
               bottomAppBarColor: Colors.black,
               cardColor: Colors.grey[900],
+              inputDecorationTheme: InputDecorationTheme(
+                fillColor: Colors.grey[900]
+              ),
               // AppBarTheme
               appBarTheme: AppBarTheme(
                 color: Colors.black,
